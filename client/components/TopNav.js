@@ -12,7 +12,6 @@ const { Item } = Menu;
 const TopNav = () => {
   const [current, setCurrent] = useState("");
 
-  
   let isServer = typeof window === 'undefined' ? false : true;
   useEffect(() => {
     isServer && setCurrent(window.location.pathname);
