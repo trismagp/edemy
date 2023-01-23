@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Context } from "../context";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("ryan@gmail.com");
@@ -13,7 +14,10 @@ const Login = () => {
   // state
   const { state, dispatch } = useContext(Context);
 
-  console.log("state", state);
+  //console.log("state", state);
+  
+  // router
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +30,19 @@ const Login = () => {
         email,
         password,
       });
+
       //console.log("LOGIN RESPONSE", data);
       dispatch({
         type: "LOGIN",
         payload: data,
       });
+
+      // save in local storage
+      window.localStorage.setItem("user", JSON.stringify(data));
+      // redirect
+      router.push("/");
+
+
       //setLoading(false);
     } catch (err) {
       //toast(err.response.data);
