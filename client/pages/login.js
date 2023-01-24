@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
@@ -13,11 +13,16 @@ const Login = () => {
 
   // state
   const { state, dispatch } = useContext(Context);
+  const { user } = state;
 
   //console.log("state", state);
   
   // router
   const router = useRouter();
+
+  useEffect(() => {
+    if (user !== null) router.push("/");
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

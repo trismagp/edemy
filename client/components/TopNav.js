@@ -6,13 +6,14 @@ import {
   LoginOutlined,
   LogoutOutlined,
   UserAddOutlined,
+  CoffeeOutlined,
 } from "@ant-design/icons";
 import { Context } from "../context";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
-const { Item } = Menu;
+const { Item, SubMenu } = Menu;
 
 const TopNav = () => {
   const [current, setCurrent] = useState("");
@@ -71,11 +72,15 @@ const TopNav = () => {
       )}
 
       {user !== null && (
-        <>
-          <Item onClick={logout} icon={<LogoutOutlined />} className="ms-auto">
+         <SubMenu
+         icon={<CoffeeOutlined />}
+         title={user && user.name}
+         className="ms-auto"
+       >
+          <Item onClick={logout} className="ms-auto">
             Logout
           </Item>
-        </>
+        </SubMenu>
       )}
     </Menu>
 
